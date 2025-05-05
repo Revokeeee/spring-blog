@@ -2,9 +2,31 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>Головна сторінка</title>
+    <title>Мій блог</title>
 </head>
 <body>
-<h1 th:text="${message}">Тут буде повідомлення</h1>
+<header>
+    <div style="float: right;">
+            <span th:if="${session.currentUser == null}">
+                <a href="/register">Реєстрація</a> |
+                <a href="/login">Вхід</a>
+            </span>
+        <span th:if="${session.currentUser != null}">
+                Вітаю, <b th:text="${session.currentUser.username}">Користувач</b> |
+                <a href="/add-post">Новий пост</a> |
+                <a href="/logout">Вийти</a>
+            </span>
+    </div>
+    <h1>Блог</h1>
+</header>
+
+<hr>
+
+<div th:each="post : ${posts}">
+    <h2 th:text="${post.title}">Заголовок</h2>
+    <p th:text="${post.content}">Текст поста</p>
+    <p><i>Автор: <span th:text="${post.author}">Автор</span></i></p>
+    <hr>
+</div>
 </body>
 </html>
