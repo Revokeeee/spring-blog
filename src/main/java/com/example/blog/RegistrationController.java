@@ -15,6 +15,12 @@ public class RegistrationController {
     private List<User> users = new ArrayList<>();
     private List<Post> posts = new ArrayList<>();
 
+    private final UserRepository userRepository;
+
+    public RegistrationController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     // Відображення форми реєстрації
     @GetMapping("/register")
     public String showRegistrationForm() {
@@ -28,19 +34,31 @@ public class RegistrationController {
     }
 
 
-    // Обробка відправленої форми
     @PostMapping("/register")
     public String registerUser(
             @RequestParam String username,
             @RequestParam String email,
             @RequestParam String password,
-            HttpSession session
+            HttpSession session,
+            Model model
     ) {
+        if (userRepository.findByUsername(username) != null) {
+            model.addAttribute("message", "Користувач з таким імʼям вже існує.");
+            return "register";
+        }
+
+        if (userRepository.findByEmail(email) != null) {
+            model.addAttribute("message", "Email вже використовується.");
+            return "register";
+        }
+
         User user = new User(username, email, password);
-        users.add(user);
-        session.setAttribute("currentUser", user); // Зберегти користувача в сесію
-        return "redirect:/"; // Перенаправити на головну
+        userRepository.save(user);
+        session.setAttribute("currentUser", user);
+        return "redirect:/";
     }
+
+
 
     @GetMapping("/login")
     public String showLoginForm() {
@@ -54,15 +72,15 @@ public class RegistrationController {
             HttpSession session,
             Model model
     ) {
-        for (User user : users) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                session.setAttribute("currentUser", user);
-                return "redirect:/"; // Після входу — на головну
-            }
+        User user = userRepository.findByUsername(username);
+        if (user != null && user.getPassword().equals(password)) {
+            session.setAttribute("currentUser", user);
+            return "redirect:/";
         }
-        model.addAttribute("message", "Невірні дані для входу.");
-        return "login"; // Якщо помилка — залишитись
+        model.addAttribute("message", "Невірне імʼя користувача або пароль.");
+        return "login";
     }
+
 
 
 }

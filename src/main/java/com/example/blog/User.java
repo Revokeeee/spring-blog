@@ -1,6 +1,9 @@
 package com.example.blog;
 
 import jakarta.persistence.*;
+import java.util.List;
+import java.util.ArrayList;
+
 
 @Entity
 public class User {
@@ -9,9 +12,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    private List<Post> posts = new ArrayList<>();
+
     private String username;
-    private String email;
     private String password;
+    @Column(nullable = false, unique = true)
+    private String email;
+
 
     public User() {} // обов’язковий конструктор
 

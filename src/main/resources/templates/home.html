@@ -25,7 +25,7 @@
 <div th:each="post : ${posts}">
     <h2 th:text="${post.title}">Заголовок</h2>
     <p th:text="${post.content}">Текст поста</p>
-    <p><i>Автор: <span th:text="${post.author}">Автор</span></i></p>
+    <p><i>Автор: <span th:text="${post.author.username}">Автор</span></i></p>
     <hr>
 </div>
 </body>

@@ -26,11 +26,14 @@ public class PostController {
     }
 
     @PostMapping("/add-post")
-    public String addPost(@RequestParam String title, @RequestParam String content, HttpSession session) {
+    public String addPost(@RequestParam String title,
+                          @RequestParam String content,
+                          HttpSession session) {
         User user = (User) session.getAttribute("currentUser");
         if (user != null) {
-            postRepository.addPost(new Post(title, content, user.getUsername()));
+            postRepository.save(new Post(title, content, user));
         }
         return "redirect:/";
     }
+
 }

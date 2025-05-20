@@ -1,19 +1,7 @@
 package com.example.blog;
 
-import org.springframework.stereotype.Component;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Component
-public class PostRepository {
-
-    private final List<Post> posts = new ArrayList<>();
-
-    public List<Post> getAllPosts() {
-        return posts;
-    }
-
-    public void addPost(Post post) {
-        posts.add(post);
-    }
+public interface PostRepository extends JpaRepository<Post, Long> {
+    // За потреби: List<Post> findByAuthor(User user);
 }
