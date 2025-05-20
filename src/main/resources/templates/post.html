@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${post.title}">Пост</title>
+</head>
+<body>
+<h1 th:text="${post.title}">Назва поста</h1>
+<p th:text="${post.content}">Вміст поста</p>
+<p><i>Автор: <span th:text="${post.author.username}"></span></i></p>
+
+<hr>
+<h3>Коментарі</h3>
+<div th:each="comment : ${post.comments}">
+    <p th:text="${comment.content}"></p>
+    <p><small th:text="${comment.author.username}"></small>, <small th:text="${#temporals.format(comment.createdAt, 'dd.MM.yyyy HH:mm')}"></small></p>
+    <hr>
+</div>
+
+<div th:if="${currentUser != null}">
+    <form method="post" th:action="@{/posts/{id}/comment(id=${post.id})}">
+        <textarea name="content" required></textarea><br>
+        <button type="submit">Додати коментар</button>
+    </form>
+</div>
+<div th:if="${currentUser == null}">
+    <p><a href="/login">Увійдіть</a>, щоб залишити коментар.</p>
+</div>
+</body>
+</html>

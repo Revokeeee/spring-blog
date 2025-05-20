@@ -2,6 +2,9 @@ package com.example.blog;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
+
 
 @Entity
 public class Post {
@@ -20,6 +23,14 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User author;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
 
     public Post() {}
 
