@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Мій блог</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
     <style>
         a.post-link {
             text-decoration: none;
@@ -14,6 +16,13 @@
 
         a.post-link:hover {
             background-color: #f5f5f5;
+        }
+
+        .post-preview {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -36,7 +45,7 @@
 <hr>
 
 <div th:each="post : ${posts}">
-    <a th:href="@{/posts/{id}(id=${post.id})}" class="post-link">
+    <a th:href="@{/posts/{id}(id=${post.id})}" class="post-link post-preview">
         <h2 th:text="${post.title}">Заголовок</h2>
         <p th:text="${post.content}">Текст поста</p>
         <p><i>Автор: <span th:text="${post.author.username}">Автор</span></i></p>

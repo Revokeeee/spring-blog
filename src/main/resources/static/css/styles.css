@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #fff;
+    padding: 16px 0 8px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    margin: 0 0 0 25px;
+    font-size: 2em;
+    color: #007bff;
+}
+
+header div {
+    margin-right: 25px;
+}
+
+.container {
+    width: 400px;
+    margin: 40px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.07);
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form textarea {
+    min-height: 70px;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+.message {
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.post-link {
+    display: block;
+    background: #fff;
+    padding: 15px 20px;
+    margin: 0 0 18px 0;
+    border-radius: 7px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    border: 1px solid #e7e7e7;
+    transition: box-shadow 0.2s, background 0.2s;
+    color: inherit;
+}
+
+.post-link:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+}
+
+h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.3em;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 24px 0;
+}
+
+@media (max-width: 500px) {
+    .container, .post-link {
+        width: 98vw;
+        padding: 10px;
+    }
+    header h1 {
+        margin: 0 0 0 10px;
+        font-size: 1.2em;
+    }
+}

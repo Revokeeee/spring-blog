@@ -3,28 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${post.title}">Пост</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
-<h1 th:text="${post.title}">Назва поста</h1>
-<p th:text="${post.content}">Вміст поста</p>
-<p><i>Автор: <span th:text="${post.author.username}"></span></i></p>
+<div class="container">
+    <h1 style="text-align: center;" th:text="${post.title}">Назва поста</h1>
+    <p th:text="${post.content}" style="margin-bottom: 20px;">Вміст поста</p>
+    <p><i>Автор: <span th:text="${post.author.username}"></span></i></p>
 
-<hr>
-<h3>Коментарі</h3>
-<div th:each="comment : ${post.comments}">
-    <p th:text="${comment.content}"></p>
-    <p><small th:text="${comment.author.username}"></small>, <small th:text="${#temporals.format(comment.createdAt, 'dd.MM.yyyy HH:mm')}"></small></p>
     <hr>
-</div>
+    <h3>Коментарі</h3>
+    <div th:if="${#lists.isEmpty(post.comments)}">
+        <p style="color: #888;">Коментарів поки що немає.</p>
+    </div>
+    <div th:each="comment : ${post.comments}">
+        <div class="comment">
+            <p th:text="${comment.content}" style="margin-bottom: 2px;"></p>
+            <p style="font-size: 12px; color: #777;">
+                <span th:text="${comment.author.username}"></span>,
+                <span th:text="${#temporals.format(comment.createdAt, 'dd.MM.yyyy HH:mm')}"></span>
+            </p>
+        </div>
+        <hr>
+    </div>
 
-<div th:if="${currentUser != null}">
-    <form method="post" th:action="@{/posts/{id}/comment(id=${post.id})}">
-        <textarea name="content" required></textarea><br>
-        <button type="submit">Додати коментар</button>
-    </form>
-</div>
-<div th:if="${currentUser == null}">
-    <p><a href="/login">Увійдіть</a>, щоб залишити коментар.</p>
+    <div th:if="${currentUser != null}" style="margin-top: 15px;">
+        <form method="post" th:action="@{/posts/{id}/comment(id=${post.id})}">
+            <textarea name="content" required placeholder="Ваш коментар..." style="width: 100%; min-height: 60px;"></textarea><br>
+            <button type="submit">Додати коментар</button>
+        </form>
+    </div>
+    <div th:if="${currentUser == null}" style="margin-top: 15px;">
+        <p><a href="/login">Увійдіть</a>, щоб залишити коментар.</p>
+    </div>
 </div>
 </body>
 </html>
