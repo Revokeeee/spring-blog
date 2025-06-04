@@ -21,7 +21,7 @@ public class RecordedTestCase {
   JavascriptExecutor js;
   @Before
   public void setUp() throws Exception {
-    WebDriverManager.chromedriver().setup(); // автоматично завантажує правильний драйвер
+    System.setProperty("webdriver.chrome.driver", "");
     driver = new ChromeDriver();
     baseUrl = "https://www.google.com/";
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
