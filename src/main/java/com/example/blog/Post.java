@@ -41,7 +41,7 @@ public class Post {
         this.createdAt = LocalDateTime.now();
     }
 
-    // геттери
+    // геттер
     public Long getId() { return id; }
     public String getTitle() { return title; }
     public String getContent() { return content; }
