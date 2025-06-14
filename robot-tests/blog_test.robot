@@ -7,7 +7,7 @@ ${URL}     http://localhost:8080
 *** Test Cases ***
 Test Login And Comment
     Sleep    2s
-    Open Browser    ${URL}    chrome
+    Open Browser    ${URL}    chrome options=add_argument(--headless);add_argument(--no-sandbox);add_argument(--disable-dev-shm-usage)
     Click Link    Вхід
     Input Text    name=username    Revoke
     Input Text    name=password    123123123
