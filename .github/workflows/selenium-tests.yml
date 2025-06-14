@@ -1,4 +1,4 @@
-name: Run Selenium tests
+name: Run Selenium Web Driven tests
 
 on:
   push:
